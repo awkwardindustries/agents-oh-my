@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/alpha/azure.yaml.json
+name: agents-oh-my
+resources:
+  ai-project:
+    type: ai.project
+    models:
+      - name: gpt-4o-mini
+        version: "2024-07-18"
+        format: OpenAI
+        sku:
+          name: GlobalStandard
+          usageName: OpenAI.GlobalStandard.gpt-4o-mini
+          capacity: 50
+hooks:
+  postprovision:
+    windows:
+      shell: pwsh
+      run: .\infra\scripts\createLocalDotenv.ps1
+      interactive: true
+      continueOnError: false
+    posix:
+      shell: sh
+      run: ./infra/scripts/createLocalDotenv.sh
+      interactive: true
+      continueOnError: false
