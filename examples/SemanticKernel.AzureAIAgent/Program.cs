@@ -18,6 +18,7 @@ AIProjectClient client = AzureAIAgent.CreateAzureAIClient(aiProjectConnectionStr
 AgentsClient agentsClient = client.GetAgentsClient();
 
 // Prep the File and Vector Store (agent-level vector store)
+
 var filePath = "../files/food-holidays.txt";
 if (Debugger.IsAttached)
     filePath = "../../../../files/food-holidays.txt";
@@ -33,6 +34,9 @@ VectorStore vectorStore = await agentsClient.CreateVectorStoreAsync(
     name: "holiday-vector-store");
 
 Console.WriteLine($"Created vector store, vector store ID: {vectorStore.Id}");
+
+// This takes some time to digest. 
+Thread.Sleep(5000);
 
 // Create the Azure.AI.Projects.Agent with FileSearch tool access
 
